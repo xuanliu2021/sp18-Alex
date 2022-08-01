@@ -10,7 +10,7 @@ public class NBody {
         return R;
     }
 
-    public static Body[] readPlanets(String file) {
+    public static Planet[] readPlanets(String file) {
         In in = new In(file);
         int count = 0;
         while(count < 2) {
