@@ -1,4 +1,4 @@
-public class Body {
+public class Planet {
     public double xxPos;
     public double yyPos;
     public double xxVel;
@@ -7,7 +7,7 @@ public class Body {
     public String imgFileName;
     public static final double g = 6.67e-11 ;
 
-    public Body(double xP, double yP, double xV,
+    public Planet(double xP, double yP, double xV,
               double yV, double m, String img) {
                xxPos = xP;
                yyPos = yP;
@@ -17,7 +17,7 @@ public class Body {
                imgFileName = img;
     }
 
-    public Body(Body b) {
+    public Planet(Planet b) {
         xxPos = b.xxPos;
         yyPos = b.yyPos;
         xxVel = b.xxVel;
@@ -26,24 +26,24 @@ public class Body {
         imgFileName = b.imgFileName;
     }
 
-    public double calcDistance(Body b) {
+    public double calcDistance(Planet b) {
         return Math.sqrt(Math.pow(b.xxPos - xxPos, 2) + Math.pow(b.yyPos - yyPos, 2));
     }
      
-    public double calcForceExertedBy(Body b) {
+    public double calcForceExertedBy(Planet b) {
         return g * mass * b.mass / Math.pow(calcDistance(b), 2);
     }
 
-    public double calcForceExertedByX(Body b) {
+    public double calcForceExertedByX(Planet b) {
         return calcForceExertedBy(b) * (b.xxPos - xxPos) / calcDistance(b);
 
     }
 
-    public double calcForceExertedByY(Body b) {
+    public double calcForceExertedByY(Planet b) {
         return calcForceExertedBy(b) * (b.yyPos - yyPos) / calcDistance(b);
     }
 
-    public double calcNetForceExertedByX(Body[] allBodies) {
+    public double calcNetForceExertedByX(Planet[] allBodies) {
         double netForceX = 0;
         for(int i = 0; i < allBodies.length; i += 1) {
             if(allBodies[i].equals(this)) {
@@ -54,7 +54,7 @@ public class Body {
         return netForceX;
     }
 
-    public double calcNetForceExertedByY(Body[] allBodies) {
+    public double calcNetForceExertedByY(Planet[] allBodies) {
         double netForceY = 0;
         for(int i = 0; i < allBodies.length; i += 1) {
             if(allBodies[i].equals(this)) {

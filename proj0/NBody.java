@@ -18,7 +18,7 @@ public class NBody {
             count ++;
         }
         
-        Body[] planets = new Body[5]; 
+        Planet[] planets = new Planet[5]; 
         for(int i = 0; i < planets.length; i += 1) {
             double xP = in.readDouble();
             double yP = in.readDouble();
@@ -26,7 +26,7 @@ public class NBody {
             double yV  = in.readDouble();
             double m = in.readDouble();
             String img = in.readString();
-            planets[i] = new Body(xP, yP, xV, yV, m, img);            
+            planets[i] = new Planet(xP, yP, xV, yV, m, img);            
         }    
         return planets;
     }
@@ -37,7 +37,7 @@ public class NBody {
         double dt = Double.parseDouble(args[1]);
         String filename = args[2];
         double radius = readRadius(filename);
-        Body[] planets = readPlanets(filename);
+        Planet[] planets = readPlanets(filename);
 
         StdDraw.setScale(-radius, radius);
 
