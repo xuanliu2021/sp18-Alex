@@ -19,7 +19,7 @@ public class NBody {
         }
         
         Planet[] planets = new Planet[5]; 
-        for(int i = 0; i < planets.length; i += 1) {
+        for(int i = 0; !in.isEmpty(); i += 1) {
             double xP = in.readDouble();
             double yP = in.readDouble();
             double xV = in.readDouble();

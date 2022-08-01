@@ -13,8 +13,3 @@
 2.870e12 0.000e00 0.000e00 6.795e03 8.683e25 uranus.gif
 0.000e00 -9.99e12 0.000e00 1.999e06 1.000000 goodbye.gif
 0.000e00 -3.50e13 0.000e00 1.999e06 1.000000 imback.gif
-
-Creator of the Universe: Andrew Dixon
-
-Pluto's vengeance
-
