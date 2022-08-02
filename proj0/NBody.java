@@ -18,8 +18,8 @@ public class NBody {
             count ++;
         }
         
-        Planet[] planets = new Planet[5]; 
-        for(int i = 0; !in.isEmpty(); i += 1) {
+        Planet[] planets = new Planet[N]; 
+        for(int i = 0; i < N; i++) {
             double xP = in.readDouble();
             double yP = in.readDouble();
             double xV = in.readDouble();
