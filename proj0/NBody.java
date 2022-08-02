@@ -12,11 +12,13 @@ public class NBody {
 
     public static Planet[] readPlanets(String file) {
         In in = new In(file);
-        int count = 0;
+        int N = in.readInt();
+        double R = in.readDouble(); 
+        /* int count = 0;
         while(count < 2) {
             double consume = in.readDouble();          
             count ++;
-        }
+        } */
         
         Planet[] planets = new Planet[N]; 
         for(int i = 0; i < N; i++) {
