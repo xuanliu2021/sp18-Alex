@@ -2,7 +2,7 @@ import sun.font.TrueTypeFont;
 
 import java.security.KeyStore;
 
-public class LinkedListDeque<Item> implements Deque<Item> {
+public class LinkedListDeque<Item> {
 
     private Node sentF;
     private Node sentB;
@@ -30,12 +30,16 @@ public class LinkedListDeque<Item> implements Deque<Item> {
         size = 0;
     }
 
-    @Override
+
     public int size() {
         return size;
     }
 
-    @Override
+    public boolean isEmpty(){
+        return size() == 0;
+    }
+
+
     public void printDeque() {
         Node p = sentF;
         while (p.next != null) {
@@ -45,21 +49,21 @@ public class LinkedListDeque<Item> implements Deque<Item> {
         System.out.println("/n");
     }
 
-    @Override
+
     public void addFirst(Item item) {
         sentF.next = new Node(sentF, item, sentF.next);
         sentF.next.next.prev = sentF.next;
         size += 1;
     }
 
-    @Override
+
     public void addLast(Item item) {
         sentB.prev = new Node(sentB.prev, item, sentB);
         sentB.prev.prev.next = sentB.prev;
         size += 1;
     }
 
-    @Override
+
     public Item removeFirst() {
         if (size == 0) {
             return null;
@@ -71,7 +75,7 @@ public class LinkedListDeque<Item> implements Deque<Item> {
         return p.item;
     }
 
-    @Override
+
     public Item removeLast() {
         if (size == 0) {
             return null;
