@@ -1,8 +1,4 @@
-import sun.font.TrueTypeFont;
-
-import java.security.KeyStore;
-
-public class LinkedListDeque<Item> {
+public class LinkedListDeque<T> {
 
     private Node sentF;
     private Node sentB;
@@ -12,10 +8,10 @@ public class LinkedListDeque<Item> {
 
     public class Node {
         private Node prev;
-        private Item item;
+        private T item;
         private Node next;
 
-        public Node(Node p, Item i, Node n) {
+        public Node(Node p, T i, Node n) {
             prev = p;
             item = i;
             next = n;
@@ -35,7 +31,7 @@ public class LinkedListDeque<Item> {
         return size;
     }
 
-    public boolean isEmpty(){
+    public boolean isEmpty() {
         return size() == 0;
     }
 
@@ -50,21 +46,21 @@ public class LinkedListDeque<Item> {
     }
 
 
-    public void addFirst(Item item) {
+    public void addFirst(T item) {
         sentF.next = new Node(sentF, item, sentF.next);
         sentF.next.next.prev = sentF.next;
         size += 1;
     }
 
 
-    public void addLast(Item item) {
+    public void addLast(T item) {
         sentB.prev = new Node(sentB.prev, item, sentB);
         sentB.prev.prev.next = sentB.prev;
         size += 1;
     }
 
 
-    public Item removeFirst() {
+    public T removeFirst() {
         if (size == 0) {
             return null;
         }
@@ -76,7 +72,7 @@ public class LinkedListDeque<Item> {
     }
 
 
-    public Item removeLast() {
+    public T removeLast() {
         if (size == 0) {
             return null;
         }
@@ -87,7 +83,7 @@ public class LinkedListDeque<Item> {
         return p.item;
     }
 
-    public Item get(int index) {
+    public T get(int index) {
         Node p = sentF.next;
         int count = 0;
 
@@ -101,14 +97,14 @@ public class LinkedListDeque<Item> {
         return p.item;
     }
 
-    public Item getHelper(Node p, int index) {
+    public T getHelper(Node p, int index) {
         if (index == 0) {
             return p.item;
         }
         return getHelper(p.next, index - 1);
     }
 
-    public Item getRecursive(int index) {
+    public T getRecursive(int index) {
         if (index >= size) {
             return null;
         }
@@ -118,7 +114,7 @@ public class LinkedListDeque<Item> {
     public LinkedListDeque(LinkedListDeque other) {
         this();
         for (int i = 0; i < other.size(); i += 1) {
-            addFirst((Item) other.get(i));
+            addFirst((T) other.get(i));
         }
     }
 }

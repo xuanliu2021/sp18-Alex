@@ -1,6 +1,6 @@
-public class ArrayDeque<Item> {
+public class ArrayDeque<T> {
 
-    private Item[] items;
+    private T[] items;
     private int size;
 
     private int nextFirst;
@@ -10,16 +10,16 @@ public class ArrayDeque<Item> {
 
     /** Build an empty array.*/
     public ArrayDeque() {
-        items = (Item []) new Object[8];
+        items = (T []) new Object[8];
         nextFirst = nextLast = 0;
         size = 0;
     }
 
-    public boolean isEmpty(){
+    public boolean isEmpty() {
         return size() == 0;
     }
 
-    public void addFirst(Item item) {
+    public void addFirst(T item) {
 
         items[nextFirst] = item;
         size += 1;
@@ -36,7 +36,7 @@ public class ArrayDeque<Item> {
     }
 
 
-    public void addLast(Item item) {
+    public void addLast(T item) {
 
         items[nextLast] = item;
         size += 1;
@@ -58,9 +58,9 @@ public class ArrayDeque<Item> {
     }
 
 
-    public Item removeFirst() {
+    public T removeFirst() {
         size -= 1;
-        Item ptr;
+        T ptr;
 
         if (nextFirst == items.length - 1) {
             ptr = items[0];
@@ -76,9 +76,9 @@ public class ArrayDeque<Item> {
     }
 
 
-    public Item removeLast() {
+    public T removeLast() {
         size -= 1;
-        Item ptr;
+        T ptr;
 
         if (nextLast == 0) {
             ptr = items[items.length - 1];
@@ -93,7 +93,7 @@ public class ArrayDeque<Item> {
         return ptr;
     }
 
-    public Item get(int index) {
+    public T get(int index) {
         int n = nextFirst;
         int idx = n + index + 1;
         if (idx > items.length - 1) {
@@ -117,11 +117,11 @@ public class ArrayDeque<Item> {
     }
 
     public void resize() {
-        Item[] a;
+        T[] a;
         //delete extra spaces when usage ratio is less than 0.25
         double uFactor = size / items.length;
         if (uFactor < 0.25 && items.length > 16) {
-            a = (Item[]) new Object[size * 2];
+            a = (T[]) new Object[size * 2];
             for (int i = 0; i < size; i += 1) {
                 if (nextFirst == items.length - 1) {
                     a[i] = items[0];
@@ -131,14 +131,14 @@ public class ArrayDeque<Item> {
                 }
             }
         } else {
-            a = (Item[]) new Object[size * 2];
+            a = (T[]) new Object[size * 2];
             System.arraycopy(items, 0, a, 0, size);
         }
         items = a;
     }
 
     public ArrayDeque(ArrayDeque other) {
-        items = (Item []) new Object[other.items.length];
+        items = (T []) new Object[other.items.length];
         nextFirst = other.nextFirst;
         if (nextFirst == items.length - 1) {
             nextLast = 0;
@@ -148,7 +148,7 @@ public class ArrayDeque<Item> {
         size = 0;
 
         for (int i = 0; i < other.size; i += 1) {
-            addLast((Item) other.get(i));
+            addLast((T) other.get(i));
         }
     }
 }
