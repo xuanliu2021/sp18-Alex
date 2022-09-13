@@ -116,7 +116,7 @@ public class ArrayDeque<T> {
         System.out.println("/n");
     }
 
-    public void resize() {
+    private void resize() {
         T[] a;
         //delete extra spaces when usage ratio is less than 0.25
         double uFactor = size / items.length;

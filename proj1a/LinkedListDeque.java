@@ -6,7 +6,7 @@ public class LinkedListDeque<T> {
 
     //why private static不行
 
-    public class Node {
+    private class Node {
         private Node prev;
         private T item;
         private Node next;
@@ -97,7 +97,7 @@ public class LinkedListDeque<T> {
         return p.item;
     }
 
-    public T getHelper(Node p, int index) {
+    private T getHelper(Node p, int index) {
         if (index == 0) {
             return p.item;
         }
