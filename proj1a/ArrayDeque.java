@@ -8,12 +8,13 @@ public class ArrayDeque<T> {
     private int nextLast;
 
 
-    /** Build an empty array.*/
+    /** Build an empty array.
     public ArrayDeque() {
         items = (T []) new Object[8];
         nextFirst = nextLast = 0;
         size = 0;
     }
+     */
 
     public boolean isEmpty() {
         return size() == 0;

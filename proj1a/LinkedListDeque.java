@@ -17,7 +17,7 @@ public class LinkedListDeque<T> {
             next = n;
         }
     }
-
+/**
     public LinkedListDeque() {
         sentF = new Node(null, null, null);
         sentB = new Node(null, null, null);
@@ -25,6 +25,7 @@ public class LinkedListDeque<T> {
         sentB.prev = sentF;
         size = 0;
     }
+ */
 
 
     public int size() {
@@ -112,9 +113,15 @@ public class LinkedListDeque<T> {
     }
 
     public LinkedListDeque(LinkedListDeque other) {
-        this();
+        sentF = new Node(null, null, null);
+        sentB = new Node(null, null, null);
+        sentF.next = sentB;
+        sentB.prev = sentF;
+
         for (int i = 0; i < other.size(); i += 1) {
             addFirst((T) other.get(i));
         }
+
+        size = other.size;
     }
 }
