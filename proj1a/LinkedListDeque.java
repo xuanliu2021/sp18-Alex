@@ -4,16 +4,16 @@ import java.security.KeyStore;
 
 public class LinkedListDeque<Item> implements Deque<Item> {
 
-    public Node sentF;
-    public Node sentB;
-    public int size;
+    private Node sentF;
+    private Node sentB;
+    private int size;
 
     //why private static不行
 
     public class Node {
-        public Node prev;
-        public Item item;
-        public Node next;
+        private Node prev;
+        private Item item;
+        private Node next;
 
         public Node(Node p, Item i, Node n) {
             prev = p;
@@ -23,7 +23,6 @@ public class LinkedListDeque<Item> implements Deque<Item> {
     }
 
     public LinkedListDeque() {
-        //what if sentinel node has no item?
         sentF = new Node(null, null, null);
         sentB = new Node(null, null, null);
         sentF.next = sentB;
