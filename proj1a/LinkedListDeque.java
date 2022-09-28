@@ -4,8 +4,6 @@ public class LinkedListDeque<T> {
     private Node sentB;
     private int size;
 
-    //why private static不行
-
     private class Node {
         private Node prev;
         private T item;
@@ -17,7 +15,7 @@ public class LinkedListDeque<T> {
             next = n;
         }
     }
-/**
+
     public LinkedListDeque() {
         sentF = new Node(null, null, null);
         sentB = new Node(null, null, null);
@@ -25,27 +23,24 @@ public class LinkedListDeque<T> {
         sentB.prev = sentF;
         size = 0;
     }
- */
-
 
     public int size() {
         return size;
     }
 
     public boolean isEmpty() {
-        return size() == 0;
+        return size == 0;
     }
 
 
     public void printDeque() {
-        Node p = sentF;
+        Node p = sentF.next;
         while (p.next != null) {
             System.out.print(p.item + " ");
             p = p.next;
         }
         System.out.println("/n");
     }
-
 
     public void addFirst(T item) {
         sentF.next = new Node(sentF, item, sentF.next);
@@ -94,7 +89,6 @@ public class LinkedListDeque<T> {
             }
             count += 1;
         }
-
         return p.item;
     }
 
@@ -119,7 +113,7 @@ public class LinkedListDeque<T> {
         sentB.prev = sentF;
 
         for (int i = 0; i < other.size(); i += 1) {
-            addFirst((T) other.get(i));
+            addLast((T) other.get(i));
         }
 
         size = other.size;

@@ -1,15 +1,13 @@
 public class LinkedListDeque<Item> implements Deque<Item> {
 
-    public Node sentF;
-    public Node sentB;
-    public int size;
+    private Node sentF;
+    private Node sentB;
+    private int size;
 
-    //why private static不行
-
-    public class Node {
-        public Node prev;
-        public Item item;
-        public Node next;
+    private class Node {
+        private Node prev;
+        private Item item;
+        private Node next;
 
         public Node(Node p, Item i, Node n) {
             prev = p;
@@ -19,22 +17,25 @@ public class LinkedListDeque<Item> implements Deque<Item> {
     }
 
     public LinkedListDeque() {
-        //what if sentinel node has no item?
         sentF = new Node(null, null, null);
         sentB = new Node(null, null, null);
         sentF.next = sentB;
         sentB.prev = sentF;
         size = 0;
     }
-
     @Override
     public int size() {
         return size;
     }
 
     @Override
+    public boolean isEmpty() {
+        return size == 0;
+    }
+
+    @Override
     public void printDeque() {
-        Node p = sentF;
+        Node p = sentF.next;
         while (p.next != null) {
             System.out.print(p.item + " ");
             p = p.next;
@@ -90,11 +91,10 @@ public class LinkedListDeque<Item> implements Deque<Item> {
             }
             count += 1;
         }
-
         return p.item;
     }
 
-    public Item getHelper(Node p, int index) {
+    private Item getHelper(Node p, int index) {
         if (index == 0) {
             return p.item;
         }
@@ -109,9 +109,15 @@ public class LinkedListDeque<Item> implements Deque<Item> {
     }
 
     public LinkedListDeque(LinkedListDeque other) {
-        this();
+        sentF = new Node(null, null, null);
+        sentB = new Node(null, null, null);
+        sentF.next = sentB;
+        sentB.prev = sentF;
+
         for (int i = 0; i < other.size(); i += 1) {
-            addFirst((Item) other.get(i));
+            addLast((Item) other.get(i));
         }
+
+        size = other.size;
     }
 }

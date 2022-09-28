@@ -1,155 +1,135 @@
 public class ArrayDeque<T> {
-
     private T[] items;
     private int size;
-
+    private int length;
     private int nextFirst;
-
     private int nextLast;
 
 
-    /** Build an empty array.
+    /** Build an empty array.*/
     public ArrayDeque() {
         items = (T []) new Object[8];
-        nextFirst = nextLast = 0;
+        nextFirst = 3;
+        nextLast = 4;
         size = 0;
+        length = 8;
     }
-     */
-
-    public boolean isEmpty() {
-        return size() == 0;
-    }
-
-    public void addFirst(T item) {
-
-        items[nextFirst] = item;
-        size += 1;
-
-        if (nextFirst == nextLast) {
-            resize();
-            nextFirst = items.length - 1;
-            nextLast = size;
-        } else if (nextFirst == 0) {
-            nextFirst = items.length - 1;
-        } else {
-            nextFirst -= 1;
-        }
-    }
-
-
-    public void addLast(T item) {
-
-        items[nextLast] = item;
-        size += 1;
-
-        if (nextFirst == nextLast) {
-            resize();
-            nextFirst = items.length - 1;
-            nextLast = size;
-        } else if (nextLast == items.length - 1) {
-            nextLast = 0;
-        } else {
-            nextLast += 1;
-        }
-    }
-
 
     public int size() {
         return size;
     }
 
-
-    public T removeFirst() {
-        size -= 1;
-        T ptr;
-
-        if (nextFirst == items.length - 1) {
-            ptr = items[0];
-            nextFirst = 0;
-            items[0] = null;
-        } else {
-            ptr = items[nextFirst + 1];
-            nextFirst += 1;
-            items[nextFirst + 1] = null;
-        }
-        resize();
-        return ptr;
-    }
-
-
-    public T removeLast() {
-        size -= 1;
-        T ptr;
-
-        if (nextLast == 0) {
-            ptr = items[items.length - 1];
-            nextLast = items.length - 1;
-            items[items.length - 1] = null;
-        } else {
-            ptr = items[nextLast - 1];
-            nextLast -= 1;
-            items[nextLast - 1] = null;
-        }
-        resize();
-        return ptr;
-    }
-
-    public T get(int index) {
-        int n = nextFirst;
-        int idx = n + index + 1;
-        if (idx > items.length - 1) {
-            idx = idx - items.length;
-        }
-
-        return items[idx];
-    }
-
-
-    public void printDeque() {
-        int n = nextFirst;
-        for (int i = 0; i < size; i += 1) {
-            if (n == items.length - 1) {
-                n = -1;
-            }
-            System.out.print(items[n + 1] + " ");
-            n += 1;
-        }
-        System.out.println("/n");
+    public boolean isEmpty() {
+        return size == 0;
     }
 
     private void resize() {
         T[] a;
-        //delete extra spaces when usage ratio is less than 0.25
-        double uFactor = size / items.length;
-        if (uFactor < 0.25 && items.length > 16) {
-            a = (T[]) new Object[size * 2];
-            for (int i = 0; i < size; i += 1) {
-                if (nextFirst == items.length - 1) {
-                    a[i] = items[0];
-                } else {
-                    a[i] = items[nextFirst + 1];
-                    nextFirst += 1;
-                }
-            }
-        } else {
-            a = (T[]) new Object[size * 2];
-            System.arraycopy(items, 0, a, 0, size);
+        a = (T[]) new Object[size * 2];
+        for(int i = 0; i < size; i++) {
+            nextFirst = plusOne(nextFirst);
+            a[i] = items[nextFirst];
         }
+        nextFirst = length - 1;
+        nextLast = size;
         items = a;
     }
 
-    public ArrayDeque(ArrayDeque other) {
-        items = (T []) new Object[other.items.length];
-        nextFirst = other.nextFirst;
-        if (nextFirst == items.length - 1) {
-            nextLast = 0;
-        } else {
-            nextLast = other.nextFirst + 1;
+    private int minusOne(int index) {
+        if (index == 0) {
+            index = length - 1;
         }
-        size = 0;
+        index -= 1;
+        return index;
+    }
+
+    private int plusOne(int index) {
+        if (index == length - 1) {
+            index = 0;
+        }
+        index += 1;
+        return index;
+    }
+
+    public void addFirst(T item) {
+        if (size == length) {
+            length = length * 2;
+            resize();
+        }
+        items[nextFirst] = item;
+        nextFirst = minusOne(nextFirst);
+        size += 1;
+    }
+
+    public void addLast(T item) {
+        if (size == length) {
+            length = length * 2;
+            resize();
+        }
+        items[nextLast] = item;
+        nextLast = plusOne(nextLast);
+        size += 1;
+    }
+
+    public T removeFirst() {
+        if (size == 0) {
+            return null;
+        }
+        nextFirst = plusOne(nextFirst);
+        T ptr = items[nextFirst];
+        items[nextFirst] = null;
+        size -= 1;
+        if (length > 16 && (size / length) < 0.25 ) {
+            length = length / 2;
+            resize();
+        }
+        return ptr;
+    }
+
+    public T removeLast() {
+        if (size == 0) {
+            return null;
+        }
+        nextLast = minusOne(nextLast);
+        T ptr = items[nextLast];
+        items[nextLast] = null;
+        size -= 1;
+        if (length > 16 && (size / length) < 0.25 ) {
+            length = length / 2;
+            resize();
+        }
+        return ptr;
+    }
+
+    public T get(int index) {
+        if (index >= size) {
+            return null;
+        }
+
+        index = nextFirst + index + 1;
+        if (index > length - 1) {
+            index = index - length;
+        }
+        return items[index];
+    }
+
+    public void printDeque() {
+        int n = plusOne(nextFirst);
+        for (int i = 0; i < size; i += 1) {
+            System.out.print(items[n] + " ");
+            n = plusOne(n);
+        }
+        System.out.println("/n");
+    }
+
+
+    public ArrayDeque(ArrayDeque other) {
+        items = (T []) new Object[other.length];
+        nextFirst = other.nextFirst;
 
         for (int i = 0; i < other.size; i += 1) {
             addLast((T) other.get(i));
         }
+        size = other.size;
     }
 }
