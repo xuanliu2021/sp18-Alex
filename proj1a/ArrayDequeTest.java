@@ -9,14 +9,12 @@ public class ArrayDequeTest {
 
     @Test
     public void createOne() {
-        ArrayDeque<Integer> bd = new ArrayDeque<> ();
-        int[] array = {0,1,2,3,4,5,6,7,8};
+        ArrayDeque<Integer> bd = new ArrayDeque<>();
+        int[] array = {0, 1, 2, 3, 4, 5, 6, 7, 8};
         for (int i : array) {
             bd.addLast(i);
         }
         bd.printDeque();
-        System.out.println(bd.size);
-        System.out.println(bd.length);
     }
 
     @Test

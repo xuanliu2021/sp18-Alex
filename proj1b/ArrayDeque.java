@@ -1,7 +1,7 @@
 public class ArrayDeque<Item> implements Deque<Item>{
     private Item[] items;
-    public int size;
-    public int length;
+    private int size;
+    private int length;
     private int nextFirst;
     private int nextLast;
 
