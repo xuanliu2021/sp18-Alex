@@ -1,7 +1,7 @@
 public class ArrayDeque<Item> implements Deque<Item>{
     private Item[] items;
-    private int size;
-    private int length;
+    public int size;
+    public int length;
     private int nextFirst;
     private int nextLast;
 
@@ -14,7 +14,6 @@ public class ArrayDeque<Item> implements Deque<Item>{
         size = 0;
         length = 8;
     }
-
     @Override
     public int size() {
         return size;
@@ -32,10 +31,10 @@ public class ArrayDeque<Item> implements Deque<Item>{
             a[i] = items[nextFirst];
         }
 
-        if (length >= 16 && size / length <= 0.25) {
-            length = length / 2;
-        } else {
+        if (size == length) {
             length = length * 2;
+        } else {
+            length = length / 2;
         }
 
         nextFirst = length - 1;
@@ -46,18 +45,18 @@ public class ArrayDeque<Item> implements Deque<Item>{
 
     private int minusOne(int index) {
         if (index == 0) {
-            index = length - 1;
+            return length - 1;
+        } else {
+            return index - 1;
         }
-        index -= 1;
-        return index;
     }
 
     private int plusOne(int index) {
         if (index == length - 1) {
-            index = 0;
+            return 0;
+        } else {
+            return index + 1;
         }
-        index += 1;
-        return index;
     }
 
     @Override
@@ -89,7 +88,7 @@ public class ArrayDeque<Item> implements Deque<Item>{
         Item ptr = items[nextFirst];
         items[nextFirst] = null;
         size -= 1;
-        if (length >= 16 && size / length <= 0.25) {
+        if (length >= 16 && length / size >= 4) {
             resize();
         }
         return ptr;
@@ -104,7 +103,7 @@ public class ArrayDeque<Item> implements Deque<Item>{
         Item ptr = items[nextLast];
         items[nextLast] = null;
         size -= 1;
-        if (length >= 16 && size / length <= 0.25) {
+        if (length >= 16 && length / size >= 4) {
             resize();
         }
         return ptr;
@@ -124,12 +123,12 @@ public class ArrayDeque<Item> implements Deque<Item>{
 
     @Override
     public void printDeque() {
-        int n = plusOne(nextFirst);
+        int n = nextFirst;
         for (int i = 0; i < size; i += 1) {
-            System.out.print(items[n] + " ");
             n = plusOne(n);
+            System.out.print(items[n] + " ");
         }
-        System.out.println("/n");
+        System.out.println("\n");
     }
 
 /*

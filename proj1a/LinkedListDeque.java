@@ -39,7 +39,7 @@ public class LinkedListDeque<T> {
             System.out.print(p.item + " ");
             p = p.next;
         }
-        System.out.println("/n");
+        System.out.println("\n");
     }
 
     public void addFirst(T item) {

@@ -40,7 +40,7 @@ public class LinkedListDeque<Item> implements Deque<Item> {
             System.out.print(p.item + " ");
             p = p.next;
         }
-        System.out.println("/n");
+        System.out.println("\n");
     }
 
     @Override

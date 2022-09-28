@@ -1,7 +1,7 @@
 public class ArrayDeque<T> {
     private T[] items;
-    private int size;
-    private int length;
+    public int size;
+    public int length;
     private int nextFirst;
     private int nextLast;
 
@@ -30,10 +30,10 @@ public class ArrayDeque<T> {
             a[i] = items[nextFirst];
         }
 
-        if (length >= 16 && size / length <= 0.25) {
-            length = length / 2;
-        } else {
+        if (size == length) {
             length = length * 2;
+        } else {
+            length = length / 2;
         }
 
         nextFirst = length - 1;
@@ -43,18 +43,18 @@ public class ArrayDeque<T> {
 
     private int minusOne(int index) {
         if (index == 0) {
-            index = length - 1;
+            return length - 1;
+        } else {
+            return index - 1;
         }
-        index -= 1;
-        return index;
     }
 
     private int plusOne(int index) {
         if (index == length - 1) {
-            index = 0;
+            return 0;
+        } else {
+            return index + 1;
         }
-        index += 1;
-        return index;
     }
 
     public void addFirst(T item) {
@@ -81,9 +81,9 @@ public class ArrayDeque<T> {
         }
         nextFirst = plusOne(nextFirst);
         T ptr = items[nextFirst];
-       // items[nextFirst] = null;
+        items[nextFirst] = null;
         size -= 1;
-        if (length >= 16 && size / length <= 0.25) {
+        if (length >= 16 && length / size >= 4) {
             resize();
         }
         return ptr;
@@ -97,7 +97,7 @@ public class ArrayDeque<T> {
         T ptr = items[nextLast];
         items[nextLast] = null;
         size -= 1;
-        if (length >= 16 && size / length <= 0.25) {
+        if (length >= 16 && length / size >= 4) {
             resize();
         }
         return ptr;
@@ -116,12 +116,12 @@ public class ArrayDeque<T> {
     }
 
     public void printDeque() {
-        int n = plusOne(nextFirst);
+        int n = nextFirst;
         for (int i = 0; i < size; i += 1) {
-            System.out.print(items[n] + " ");
             n = plusOne(n);
+            System.out.print(items[n] + " ");
         }
-        System.out.println("/n");
+        System.out.println("\n");
     }
 
 /*
