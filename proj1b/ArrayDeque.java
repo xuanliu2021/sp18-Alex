@@ -26,7 +26,7 @@ public class ArrayDeque<Item> implements Deque<Item>{
     }
 
     private void resize() {
-        Item[] a = (Item[]) new Object[size * 2];;
+        Item[] a = (Item[]) new Object[size * 2];
         for (int i = 0; i < size; i++) {
             nextFirst = plusOne(nextFirst);
             a[i] = items[nextFirst];

@@ -24,7 +24,7 @@ public class ArrayDeque<T> {
     }
 
     private void resize() {
-        T[] a = (T[]) new Object[size * 2];;
+        T[] a = (T[]) new Object[size * 2];
         for (int i = 0; i < size; i++) {
             nextFirst = plusOne(nextFirst);
             a[i] = items[nextFirst];
