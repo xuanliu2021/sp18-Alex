@@ -26,16 +26,23 @@ public class ArrayDeque<Item> implements Deque<Item>{
     }
 
     private void resize() {
-        Item[] a;
-        a = (Item[]) new Object[size * 2];
-        for(int i = 0; i < size; i++) {
+        Item[] a = (Item[]) new Object[size * 2];;
+        for (int i = 0; i < size; i++) {
             nextFirst = plusOne(nextFirst);
             a[i] = items[nextFirst];
         }
+
+        if (length > 16 && (size / length) < 0.25) {
+            length = length / 2;
+        } else {
+            length = length * 2;
+        }
+
         nextFirst = length - 1;
         nextLast = size;
         items = a;
     }
+
 
     private int minusOne(int index) {
         if (index == 0) {
@@ -56,7 +63,6 @@ public class ArrayDeque<Item> implements Deque<Item>{
     @Override
     public void addFirst(Item item) {
         if (size == length) {
-            length = length * 2;
             resize();
         }
         items[nextFirst] = item;
@@ -67,7 +73,6 @@ public class ArrayDeque<Item> implements Deque<Item>{
     @Override
     public void addLast(Item item) {
         if (size == length) {
-            length = length * 2;
             resize();
         }
         items[nextLast] = item;
@@ -84,8 +89,7 @@ public class ArrayDeque<Item> implements Deque<Item>{
         Item ptr = items[nextFirst];
         items[nextFirst] = null;
         size -= 1;
-        if (length > 16 && (size / length) < 0.25 ) {
-            length = length / 2;
+        if (length > 16 && (size / length) < 0.25) {
             resize();
         }
         return ptr;
@@ -100,8 +104,7 @@ public class ArrayDeque<Item> implements Deque<Item>{
         Item ptr = items[nextLast];
         items[nextLast] = null;
         size -= 1;
-        if (length > 16 && (size / length) < 0.25 ) {
-            length = length / 2;
+        if (length > 16 && (size / length) < 0.25) {
             resize();
         }
         return ptr;
