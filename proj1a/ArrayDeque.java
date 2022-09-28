@@ -30,7 +30,7 @@ public class ArrayDeque<T> {
             a[i] = items[nextFirst];
         }
 
-        if (length > 16 && (size / length) < 0.25) {
+        if (length >= 16 && size / length <= 0.25) {
             length = length / 2;
         } else {
             length = length * 2;
@@ -81,9 +81,9 @@ public class ArrayDeque<T> {
         }
         nextFirst = plusOne(nextFirst);
         T ptr = items[nextFirst];
-        items[nextFirst] = null;
+       // items[nextFirst] = null;
         size -= 1;
-        if (length > 16 && (size / length) < 0.25) {
+        if (length >= 16 && size / length <= 0.25) {
             resize();
         }
         return ptr;
@@ -97,7 +97,7 @@ public class ArrayDeque<T> {
         T ptr = items[nextLast];
         items[nextLast] = null;
         size -= 1;
-        if (length > 16 && (size / length) < 0.25) {
+        if (length >= 16 && size / length <= 0.25) {
             resize();
         }
         return ptr;

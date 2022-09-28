@@ -32,7 +32,7 @@ public class ArrayDeque<Item> implements Deque<Item>{
             a[i] = items[nextFirst];
         }
 
-        if (length > 16 && (size / length) < 0.25) {
+        if (length >= 16 && size / length <= 0.25) {
             length = length / 2;
         } else {
             length = length * 2;
@@ -89,7 +89,7 @@ public class ArrayDeque<Item> implements Deque<Item>{
         Item ptr = items[nextFirst];
         items[nextFirst] = null;
         size -= 1;
-        if (length > 16 && (size / length) < 0.25) {
+        if (length >= 16 && size / length <= 0.25) {
             resize();
         }
         return ptr;
@@ -104,7 +104,7 @@ public class ArrayDeque<Item> implements Deque<Item>{
         Item ptr = items[nextLast];
         items[nextLast] = null;
         size -= 1;
-        if (length > 16 && (size / length) < 0.25) {
+        if (length >= 16 && size / length <= 0.25) {
             resize();
         }
         return ptr;
