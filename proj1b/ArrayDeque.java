@@ -129,7 +129,7 @@ public class ArrayDeque<Item> implements Deque<Item>{
         System.out.println("/n");
     }
 
-
+/*
     public ArrayDeque(ArrayDeque other) {
         items = (Item []) new Object[other.length];
         nextFirst = other.nextFirst;
@@ -139,4 +139,6 @@ public class ArrayDeque<Item> implements Deque<Item>{
         }
         size = other.size;
     }
+
+ */
 }

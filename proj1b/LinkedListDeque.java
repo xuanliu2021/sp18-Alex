@@ -108,6 +108,7 @@ public class LinkedListDeque<Item> implements Deque<Item> {
         return getHelper(sentF.next, index);
     }
 
+    /*
     public LinkedListDeque(LinkedListDeque other) {
         sentF = new Node(null, null, null);
         sentB = new Node(null, null, null);
@@ -120,4 +121,6 @@ public class LinkedListDeque<Item> implements Deque<Item> {
 
         size = other.size;
     }
+
+     */
 }

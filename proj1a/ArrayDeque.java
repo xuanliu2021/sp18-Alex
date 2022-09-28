@@ -122,7 +122,7 @@ public class ArrayDeque<T> {
         System.out.println("/n");
     }
 
-
+/*
     public ArrayDeque(ArrayDeque other) {
         items = (T []) new Object[other.length];
         nextFirst = other.nextFirst;
@@ -132,4 +132,5 @@ public class ArrayDeque<T> {
         }
         size = other.size;
     }
+ */
 }
